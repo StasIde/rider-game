@@ -1,0 +1,21 @@
+.new-trick__form {
+  display: none;
+
+  &.show {
+    display: block;
+  }
+}
+
+.start {
+  .start__form-tricks {
+    list-style-type: none;
+  }
+
+  .trick__item {
+    cursor: pointer;
+
+    &.checked {
+      color: red;
+    }
+  }
+}

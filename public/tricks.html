@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"
+    />
+    <link rel="stylesheet" href="./css/styles.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <header>
+      <nav class="navbar">
+        <ul class="navbar__list">
+          <li class="navbar__item">
+            <a class="navbar__link" href="./index.html">HOME</a>
+          </li>
+          <li class="navbar__item">
+            <a class="navbar__link" href="./tricks.html">TRICKS</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <div class="new-trick">
+        <button class="new-trick__btn">Create new trick</button>
+        <form class="new-trick__form">
+          <div class="form-group">
+            <label class="form-group__label" for="name">Name:</label>
+            <input
+              class="form-group__input"
+              name="name"
+              type="text"
+              placeholder="enter trick name"
+            />
+          </div>
+
+          <div class="form-group">
+            <label class="form-group__label" for="complexity"
+              >Complexity:</label
+            >
+            <select class="form-group__select" name="complexity">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+              <option value="10">10</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-group__label" for="description"
+              >Description:</label
+            >
+            <textarea
+              class="form-group__input"
+              name="description"
+              placeholder="enter description"
+            ></textarea>
+          </div>
+          <button class="form-group__button" type="submit" class="approve">
+            Save
+          </button>
+        </form>
+      </div>
+
+      <section class="tricks">
+        <h2 class="tricks__title">Tricks</h2>
+        <ul class="tricks__list"></ul>
+      </section>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script type="module" src="../js/tricks.js"></script>
+  </body>
+</html>

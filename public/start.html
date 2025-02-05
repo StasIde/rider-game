@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <link rel="stylesheet" href="./css/styles.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <header>
+      <nav class="navbar">
+        <ul class="navbar__list">
+          <li class="navbar__item">
+            <a class="navbar__link" href="./index.html">HOME</a>
+          </li>
+          <li class="navbar__item">
+            <a class="navbar__link" href="./tricks.html">TRICKS</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <div class="start">
+        <form class="start__form">
+          <label class="start__form-label" for="players">Select number of players</label>
+          <select class="start__form-select" name="players">
+            <option value="" selected disabled hidden>Choose here</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+          </select>
+          <div class="start__form-players"></div>
+
+          <label class="start__form-label" for="tricks">Select tricks for game</label>
+          <ul class="start__form-tricks" name="tricks"></ul>
+
+          <button class="start__form-btn" type="submit">
+            Start game
+          </button>
+        </form>
+      </div>
+    </main>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script type="module" src="../js/start.js"></script>
+  </body>
+</html>
