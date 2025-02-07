@@ -1,22 +1,22 @@
 class Player {
-  constructor(name) {
+  constructor(name, tricksCompleted = [], letters = 0) {
     this.name = name;
-    this.tricksCompleted = new Set();
-    this.letters = "";
+    this.tricksCompleted = tricksCompleted;
+    this.letters = letters;
   }
 
   performTrick(trick) {
-    this.tricksCompleted.add(trick);
+    this.tricksCompleted.push(trick);
   }
 
   addLetter() {
-    if (this.letters.length < 5) {
-      this.letters += "RIDER"[this.letters.length];
+    if (this.letters < 5) {
+      this.letters++;
     }
   }
 
   isEliminated() {
-    return this.letters.length >= 5;
+    return this.letters >= 5;
   }
 }
 

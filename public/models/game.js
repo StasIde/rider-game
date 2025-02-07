@@ -2,7 +2,7 @@ import Player from "./player.js";
 
 class Game {
   constructor(players, tricks) {
-    this.players = players.map(name => new Player(name));
+    this.players = players.map(player => new Player(player.name, player.tricksCompleted, player.letters));
     this.tricks = tricks;
     this.currentPlayerIndex = 0;
   }
@@ -20,24 +20,16 @@ class Game {
       player.addLetter();
     }
 
-    if (player.isEliminated()) {
-      console.log(`${player.name} wasted!`);
+    this.currentPlayerIndex++;
+
+    if (this.players.length < this.currentPlayerIndex + 1) {
+      this.currentPlayerIndex = 0;
     }
-
-    this.nextTurn();
-  }
-
-  nextTurn() {
-    do {
-      this.currentPlayerIndex =
-        (this.currentPlayerIndex + 1) % this.players.length;
-    } while (this.currentPlayer.isEliminated());
   }
 
   checkWinner() {
     const activePlayers = this.players.filter(player => !player.isEliminated());
     if (activePlayers.length === 1) {
-      console.log(`The winner is: ${activePlayers[0].name}!`);
       return activePlayers[0];
     }
     return null;
