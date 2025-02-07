@@ -1,8 +1,10 @@
 class Player {
-  constructor(name, tricksCompleted = [], letters = 0) {
+  constructor(name, tricksCompleted = [], letters = "") {
+    this.id =
     this.name = name;
     this.tricksCompleted = tricksCompleted;
     this.letters = letters;
+    this.maxLetters = "RIDER";
   }
 
   performTrick(trick) {
@@ -10,13 +12,13 @@ class Player {
   }
 
   addLetter() {
-    if (this.letters < 5) {
-      this.letters++;
+    if (this.letters.length < this.maxLetters.length) {
+      this.letters += this.maxLetters[this.letters.length];
     }
   }
 
   isEliminated() {
-    return this.letters >= 5;
+    return this.letters.length >= this.maxLetters.length;
   }
 }
 

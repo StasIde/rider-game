@@ -1,20 +1,21 @@
-import Game from "../models/game.js";
 import { Wheel } from "https://cdn.jsdelivr.net/npm/spin-wheel@5.0.2/dist/spin-wheel-esm.js";
-import Player from "../models/player.js";
 
 import { isNonEmptyArray } from "./utils.js";
+import Player from "../models/player.js";
+import Game from "../models/game.js";
+import Modal from "../models/modal.js";
 
 const playersList = document.querySelector(".game__players");
 const wheelContainer = document.querySelector(".game__wheel-container");
 const gameData = JSON.parse(localStorage.getItem("game")) || null;
 const spinButton = document.querySelector(".game__wheel-btn");
+const modal = new Modal();
 
 let game;
 let wheel;
 
 if (Boolean(gameData)) {
   game = new Game(gameData.players, gameData.tricks);
-  // console.log(game);
 } else {
   window.location.href = "/start.html";
 }
@@ -44,7 +45,6 @@ function renderPlayers(players) {
         </li>
       `)
     }
-
   }).join("");
 }
 
@@ -57,17 +57,23 @@ async function handleSpin() {
   wheel.onRest = async function (event) {
     const currentTrickIndex = event.currentIndex;
     const trick = game.tricks[currentTrickIndex];
-
-    game.players.forEach(async (player) => {
-      if (player.isEliminated()) return;
-      
+  
+    for (const player of game.players) {      
       const result = await getTrickResult(player, trick);
       game.playTurn(trick, result);
-      game.checkWinner();
 
+      if (player.isEliminated()) {
+        game.removePlayer(player);
+      };
+  
       renderPlayers(game.players);
       localStorage.setItem("game", JSON.stringify(game));
-    });
+    }
+    
+    const winner = game.checkWinner();
+    if (winner) {
+      modal.open({ title: "Winner", text: `${winner.name} won the game!` });
+    }
 
     spinButton.disabled = false;
   };
@@ -75,10 +81,13 @@ async function handleSpin() {
 
 function getTrickResult(player, trick) {
   return new Promise(resolve => {
-    setTimeout(() => {
-      const result = confirm(`${player.name} performed "${trick.name}"?`);
-      resolve(result);
-    }, 1000);
+    modal.open({
+      title: `${player.name} performed "${trick.name}"?`,
+      buttons: [
+        { label: "No", onClick: () => resolve(false) },
+        { label: "Yes", onClick: () => resolve(true) },
+      ],
+    });
   });
 }
 

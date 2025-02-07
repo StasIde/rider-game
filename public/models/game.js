@@ -14,7 +14,7 @@ class Game {
   playTurn(trick, success) {
     const player = this.currentPlayer;
 
-    if (success) {
+    if (success) {      
       player.performTrick(trick);
     } else {
       player.addLetter();
@@ -33,6 +33,10 @@ class Game {
       return activePlayers[0];
     }
     return null;
+  }
+
+  removePlayer(player) {
+    this.players = this.players.filter(p => p.name !== player.name);
   }
 }
 
