@@ -8,30 +8,28 @@
       type="text/css"
       href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"
     />
-    <link rel="stylesheet" href="./css/styles.css" />
+    <link rel="stylesheet" href="./css/index.css" />
     <title>Rider</title>
   </head>
   <body>
-    <header class="header">
-      <ul class="navbar">
-        <li class="navbar__item">
-          <a class="navbar__link" href="./index.html">HOME</a>
-        </li>
-        <li class="navbar__item">
-          <a class="navbar__link" href="./tricks.html">TRICKS</a>
-        </li>
-      </ul>
-    </header>
-    <main>
-      <div class="title">
-        <h2 class="title__text">Welcome to the game</h2>
+    <main class="main">
+      <header></header>
+      <div class="main__logo">
+        <img class="main__logo-img" src="./assets/icons/logo.svg" alt="logo" />
       </div>
-      <ul class="list">
-        <li class="list__item">
-          <a class="list__link" href="./game.html">Continue game</a>
+      <div class="main__title">
+        <h1 class="main__title-text">Welcome</h1>
+        <h2 class="main__title-text">To The Game</h2>
+      </div>
+      <ul class="main__menu">
+        <li class="main__item">
+          <a class="main__item-link primary-btn" href="./game.html">CONTINUE GAME</a>
         </li>
-        <li class="list__item">
-          <a class="list__link" href="./start.html">Start new game</a>
+        <li class="main__item">
+          <a class="main__item-link secondary-btn" href="./start.html">START NEW GAME</a>
+        </li>
+        <li class="main__item">
+          <a class="main__item-link link-btn" href="./tricks.html">My Tricks</a>
         </li>
       </ul>
     </main>
