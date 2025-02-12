@@ -1,0 +1,257 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --primary: #b55bff;
+  --secondary: rgb(204, 141, 255);
+
+  --primary-button-bg-color: linear-gradient(
+    45deg,
+    var(--secondary),
+    var(--primary)
+  );
+  --secondary-button-bg-color: #ffffff;
+  --link-button-bg-color: transparent;
+  --input-bg-color: #ffffff;
+  --start-bg-bottom-color: #433e5a;
+  --start-bg-bottom-trick-color: #31333e;
+  --start-bg-checkout-trick-color: #1e2327;
+  --game-bg-color: linear-gradient(45deg, #564c7a, #403c55);
+  --trick-row-bg-color: #31333e;
+
+  --secondary-button-text-color: var(--primary);
+  --primary-button-text-color: #ffffff;
+  --link-button-text-color: #ffffff;
+  --title-text-color: #ffffff;
+  --input-text-color: #271e27;
+  --start-text-trick-color: #e0e2ea;
+  --game-text-player-color: #ffffff;
+  --trick-row-text-color: #e0e2ea;
+
+  --shadow-color: var(--secondary);
+  --border-checkout-trick-color: #55596b;
+  --wheel-border-color: var(--primary);
+  --game-border-player-color: #55596a;
+  --modal-border-input-color: #e0e2ea;
+
+  --font-family: "Montserrat", serif;
+
+  font-family: var(--font-family);
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+
+  @media screen and (max-width: 1200px) {
+    padding: 0 20px;
+  }
+}
+
+.primary-btn,
+.secondary-btn,
+.link-btn {
+  border: none;
+  width: 200px;
+  display: block;
+  padding: 15px 0;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 16px;
+  text-align: center;
+  text-decoration: none;
+  background: var(--primary-button-bg-color);
+  transition: all 0.3s ease;
+  color: var(--primary-button-text-color);
+
+  &:hover {
+    opacity: 0.8;
+  }
+
+  @media screen and (max-width: 500px) {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+  }
+}
+
+.secondary-btn {
+  background: var(--secondary-button-bg-color);
+  color: var(--secondary-button-text-color);
+}
+
+.link-btn {
+  padding: 0;
+  width: auto;
+  border-radius: 0;
+  width: fit-content;
+  border-bottom: 1px solid var(--link-button-text-color);
+  background: var(--link-button-bg-color);
+  color: var(--link-button-text-color);
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+
+  &.modal.open {
+    display: flex;
+  }
+
+  .modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(204, 141, 255, 0.3);
+  }
+
+  .modal-content {
+    position: relative;
+    background: white;
+    padding: 40px 80px;
+    border-radius: 10px;
+    text-align: center;
+    z-index: 10;
+
+    @media screen and (max-width: 700px) {
+      padding: 20px;
+    }
+
+    .modal-title {
+      font-size: 28px;
+      font-weight: 900;
+
+      @media screen and (max-width: 700px) {
+        font-size: 20px;
+      }
+    }
+
+    .modal-text {
+      font-weight: 400;
+      padding-top: 20px;
+      font-size: 20px;
+
+      @media screen and (max-width: 700px) {
+        font-size: 16px;
+      }
+    }
+
+    .modal-form-container {
+      .new-trick__form {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        .new-trick__form-group {
+          gap: 10px;
+          display: grid;
+          grid-template-columns: 3fr 2fr;
+
+          .new-trick__form-group-name {
+            border: 1px solid var(--modal-border-input-color);
+            padding: 12px;
+            font-size: 14px;
+            border-radius: 5px;
+            outline: none;
+            font-family: inherit;
+          }
+
+          .new-trick__form-group-complexity {
+            padding: 12px;
+            font-size: 14px;
+            border-radius: 5px;
+            position: relative;
+            outline: none;
+            color: var(--input-text-color);
+            border: 1px solid var(--modal-border-input-color);
+          }
+        }
+
+        .new-trick__form-group-description {
+          width: 100%;
+          outline: none;
+          padding: 12px;
+          font-size: 14px;
+          margin-top: 20px;
+          border-radius: 5px;
+          position: relative;
+          font-family: inherit;
+          max-width: 314px;
+          min-height: 100px;
+          border: 1px solid var(--modal-border-input-color);
+          color: var(--input-text-color);
+        }
+
+        .form-submit-btn-container {
+          display: flex;
+          justify-content: space-between;
+          gap: 20px;
+        }
+
+        .form-submit-btn {
+          width: 100%;
+          margin-top: 40px;
+        }
+      }
+    }
+  }
+
+  .modal-buttons {
+    gap: 20px;
+    display: flex;
+
+    .modal-button.primary-btn {
+      margin-top: 40px;
+      font-family: inherit;
+
+      @media screen and (max-width: 700px) {
+        width: 100%;
+        margin-top: 20px;
+      }
+    }
+
+    .modal-button.secondary-btn {
+      margin-top: 40px;
+      font-family: inherit;
+      border: 1px solid var(--secondary-button-text-color);
+
+      @media screen and (max-width: 700px) {
+        width: 100%;
+        margin-top: 20px;
+      }
+    }
+
+    .modal-button.close-btn {
+      width: 20px;
+      height: 20px;
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      cursor: pointer;
+      border: none;
+      font-family: inherit;
+      background-image: url("../assets/icons/delete.svg");
+      background-repeat: no-repeat;
+      background-position: center;
+      background-color: transparent;
+    }
+  }
+}
