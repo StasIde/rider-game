@@ -1,21 +1,30 @@
 import { toast } from "./utils.js";
 import { trickApi } from "../api/TrickApi.js";
-import Game from "../models/game.js";
+import Game from "../modules/game.js";
 
 const form = document.querySelector(".start__form");
-const select = document.querySelector(".start__form-select");
 const submitBtn = document.querySelector(".start__form-btn");
 const playersContainer = document.querySelector(".start__form-players");
-const tricksList = document.querySelector(".start__form-tricks");
+const tricksList = document.querySelector(".start__form-tricks-list");
+const dropdown = document.querySelector(".start__form-dropdown");
+const dropdownLabel = document.querySelector(".dropdown__label");
+const dropdownItem = document.querySelectorAll(".dropdown__list-item");
+
+document.addEventListener("click", e => {
+  if (!e.target.classList.contains("dropdown__label")) {
+    dropdown.classList.remove("active");
+  }
+})
 
 tricksList.addEventListener("click", handleTrickClick);
-select.addEventListener("change", handlePlayerCountChange);
 form.addEventListener("submit", handleFormSubmit);
+dropdownLabel.addEventListener("click", handleDropdownShow);
+dropdownItem.forEach(item => item.addEventListener("click", handleDropdownItemClick));
 
 async function initializeApp() {
   try {
     const { tricks } = await trickApi.getAll();
-    renderTricks([{ name: "get random" }, { name: "get all" }, ...tricks]);
+    renderTricks([{ name: "Get all" }, ...tricks]);
   } catch (error) {
     console.error("Error initializing", error);
   }
@@ -27,26 +36,26 @@ function handleTrickClick(e) {
 
   const { id } = trickItem;
 
-  if (id === "get all") {
-    const isChecked = !trickItem.classList.contains("checked");
-    trickItem.classList.toggle("checked", isChecked);
+  if (id === "Get all") {
+    const isChecked = !trickItem.classList.contains("active");
+    trickItem.classList.toggle("active", isChecked);
     toggleAllTricks(isChecked);
     return;
   }
 
   if (id === "get random") {
-    trickItem.classList.toggle("checked");
+    trickItem.classList.toggle("active");
     return;
   }
 
-  trickItem.classList.toggle("checked");
+  trickItem.classList.toggle("active");
   updateControlButtonsState();
 }
 
 function toggleAllTricks(isChecked) {
   document.querySelectorAll(".trick__item").forEach(item => {
-    if (!["get all", "get random"].includes(item.id)) {
-      item.classList.toggle("checked", isChecked);
+    if (!["Get all"].includes(item.id)) {
+      item.classList.toggle("active", isChecked);
     }
   });
 }
@@ -54,14 +63,14 @@ function toggleAllTricks(isChecked) {
 function updateControlButtonsState() {
   const allTricks = Array.from(
     document.querySelectorAll(".trick__item")
-  ).filter(item => !["get all", "get random"].includes(item.id));
+  ).filter(item => !["Get all"].includes(item.id));
   const selectedCount = [...allTricks].filter(item =>
-    item.classList.contains("checked")
+    item.classList.contains("active")
   ).length;
 
   document
-    .getElementById("get all")
-    .classList.toggle("checked", selectedCount === allTricks.length);
+    .getElementById("Get all")
+    .classList.toggle("active", selectedCount === allTricks.length);
 }
 
 function handlePlayerCountChange(e) {
@@ -77,18 +86,12 @@ function handlePlayerCountChange(e) {
 
 function createPlayerInputs(count) {
   return Array.from({ length: count }, (_, index) => {
-    const div = document.createElement("div");
-    div.className = "form-group";
-    div.innerHTML = `
-        <label class="player__label">Player ${index + 1}</label>
-        <input 
-          type="text" 
-          class="player__name" 
-          placeholder="Enter player name"
-          required
-        />
-      `;
-    return div;
+    const input = document.createElement("input");
+    input.className = "player__name";
+    input.required = true;
+    input.placeholder = `Player ${index + 1}`;
+    input.type = "text";
+    return input;
   });
 }
 
@@ -119,31 +122,21 @@ function getValidPlayers() {
 }
 
 function getSelectedTricks() {
-  const isRandomMode = document.getElementById("get random").classList.contains("checked");
-  const allTricks = Array.from( document.querySelectorAll(".trick__item")).filter(item => !["get all", "get random"].includes(item.id));
-
-  if (isRandomMode) {
-    return getRandomTricks(allTricks);
-  }
+  const allTricks = Array.from( document.querySelectorAll(".trick__item")).filter(item => !["Get all"].includes(item.id));
 
   return allTricks
-    .filter(item => item.classList.contains("checked"))
+    .filter(item => item.classList.contains("active"))
     .map(item => item.id);
-}
-
-function getRandomTricks(tricks) {
-  const randomCount = Math.floor(Math.random() * tricks.length) + 1;
-  return tricks.sort(() => Math.random() - 0.5).slice(0, randomCount).map(item => item.id);
 }
 
 function validateForm({ players, tricks }) {
   if (players.length === 0) {
-    toast("Please enter at least two player names");
+    toast({ message: "Please enter at least two player names"});
     return false;
   }
 
-  if (tricks.length < 5) {
-    toast({ message: "Please select at least 5 tricks!", status: "error" });
+  if (tricks.length < 6) {
+    toast({ message: "Please select at least 6 tricks!" });
     return false;
   }
 
@@ -160,6 +153,17 @@ function renderTricks(tricks) {
     `
     )
     .join("");
+}
+
+function handleDropdownShow() {
+  dropdown.classList.toggle("active");
+}
+
+function handleDropdownItemClick(e) {
+  const playerCount = parseInt(e.target.textContent) || 0;
+  dropdownLabel.innerHTML = playerCount;
+  handlePlayerCountChange({ target: { value: playerCount } });
+  dropdown.classList.remove("active");
 }
 
 document.addEventListener("DOMContentLoaded", initializeApp);
