@@ -9,34 +9,25 @@
       href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"
     />
 
-    <link rel="stylesheet" href="./css/styles.css" />
+    <link rel="stylesheet" href="./css/game.css" />
     <title>Document</title>
   </head>
   <body>
-    <header class="header">
-      <ul class="navbar">
-        <li class="navbar__item">
-          <a class="navbar__link" href="./index.html">HOME</a>
-        </li>
-        <li class="navbar__item">
-          <a class="navbar__link" href="./tricks.html">TRICKS</a>
-        </li>
-      </ul>
-    </header>
-    <main>
-      <div class="game">
-        <div class="game__wheel">
-          <image
-            src="./assets/icons/arrow-bottom-icon.svg"
-            class="game__wheel-arrow"
-            alt="Arrow down icon"
-          ></image>
-          <div class="game__wheel-container"></div>
-          <button class="game__wheel-btn">Roll</button>
-        </div>
-
-        <ul class="game__players"></ul>
+    <main class="game">
+      <div class="game__logo">
+        <img
+          class="game__logo-img"
+          src="./assets/icons/logo-small.svg"
+          alt="logo"
+        />
       </div>
+      <div class="game__wheel container">
+        <div class="game__wheel-container"></div>
+        <button class="game__wheel-btn primary-btn">SPIN THE WHEEL</button>
+        <ul class="game__players"></ul>
+        <a class="game__wheel-btn link-btn" href="./index.html">Back</a>
+      </div>
+
     </main>
     <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <script type="module" src="./js/game.js"></script>

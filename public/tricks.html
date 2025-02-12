@@ -8,72 +8,39 @@
       type="text/css"
       href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"
     />
-    <link rel="stylesheet" href="./css/styles.css" />
+    <link rel="stylesheet" href="./css/tricks.css" />
     <title>Document</title>
   </head>
   <body>
-    <header class="header">
-      <ul class="navbar">
-        <li class="navbar__item">
-          <a class="navbar__link" href="./index.html">HOME</a>
+    <div class="tricks">
+    <header class="header container">
+      <div class="header__logo">
+        <img
+          class="header__logo-img"
+          src="./assets/icons/logo-small.svg"
+          alt="logo"
+        />
+      </div>
+      <ul class="header__menu">
+        <li class="header__item">
+          <a class="header__item-back link-btn" href="./index.html">Back</a>
         </li>
-        <li class="navbar__item">
-          <a class="navbar__link" href="./tricks.html">TRICKS</a>
+        <li class="header__item">
+          <h2 class="header__item-title">My Tricks</h2>
+        </li>
+        <li class="header__item">
+          <button class="header__item-create primary-btn">CREATE TRICK</button>
         </li>
       </ul>
     </header>
-    <main>
-      <div class="new-trick">
-        <button class="new-trick__btn">Create new trick</button>
-        <form class="new-trick__form">
-          <div class="form-group">
-            <label class="form-group__label" for="name">Name:</label>
-            <input
-              class="form-group__input"
-              name="name"
-              type="text"
-              placeholder="enter trick name"
-            />
-          </div>
-
-          <div class="form-group">
-            <label class="form-group__label" for="complexity"
-              >Complexity:</label
-            >
-            <select class="form-group__select" name="complexity">
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-              <option value="6">6</option>
-              <option value="7">7</option>
-              <option value="8">8</option>
-              <option value="9">9</option>
-              <option value="10">10</option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label class="form-group__label" for="description"
-              >Description:</label
-            >
-            <textarea
-              class="form-group__input"
-              name="description"
-              placeholder="enter description"
-            ></textarea>
-          </div>
-          <button class="form-group__button" type="submit" class="approve">
-            Save
-          </button>
-        </form>
+    <main class="tricks-table container">
+      <div class="tricks__titles">
+        <span class="tricks__titles-name">Name</span>
+        <span class="tricks__titles-complexity">Complexity</span>
+        <span class="tricks__titles-description">Description</span>
       </div>
-
-      <section class="tricks">
-        <h2 class="tricks__title">Tricks</h2>
-        <ul class="tricks__list"></ul>
-      </section>
+      <ul class="tricks__list"></ul>
+    </div>
     </main>
     <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <script type="module" src="../js/tricks.js"></script>

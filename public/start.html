@@ -3,45 +3,57 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
-    <link rel="stylesheet" href="./css/styles.css" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"
+    />
+    <link rel="stylesheet" href="./css/start.css" />
     <title>Document</title>
   </head>
   <body>
-    <header class="header">
-      <ul class="navbar">
-        <li class="navbar__item">
-          <a class="navbar__link" href="./index.html">HOME</a>
-        </li>
-        <li class="navbar__item">
-          <a class="navbar__link" href="./tricks.html">TRICKS</a>
-        </li>
-      </ul>
-    </header>
-    <main>
-      <div class="start">
-        <form class="start__form">
-          <label class="start__form-label" for="players">Select number of players</label>
-          <select class="start__form-select" name="players">
-            <option value="" selected disabled hidden>Choose here</option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-          </select>
+    <main class="start">
+      <form class="start__form">
+        <section class="start__form-header">
+          <div class="start__form-logo">
+            <img
+              class="start__form-logo"
+              src="./assets/icons/logo-small.svg"
+              alt="logo"
+            />
+          </div>
+          <h3 class="start__form-title">Start Your Game</h3>
+          <div class="start__form-label">Choose Players</div>
+          <div class="start__form-dropdown">
+            <div class="dropdown__label">Select number of players</div>
+            <div class="dropdown__content">
+              <ul class="dropdown__list">
+                <li class="dropdown__list-item">2</li>
+                <li class="dropdown__list-item">3</li>
+                <li class="dropdown__list-item">4</li>
+                <li class="dropdown__list-item">5</li>
+              </ul>
+            </div>
+          </div>
           <div class="start__form-players"></div>
+        </section>
 
-          <label class="start__form-label" for="tricks">Select tricks for game</label>
-          <ul class="start__form-tricks" name="tricks"></ul>
-
-          <button class="start__form-btn" type="submit">
-            Start game
-          </button>
-        </form>
-      </div>
+        <section class="start__form-tricks">
+          <div class="container">
+            <h3 class="start__form-label">Choose Tricks For Game</h3>
+            <ul class="start__form-tricks-list"></ul>
+            <div class="start__form-buttons">
+              <button class="start__form-btn primary-btn" type="submit">Start game</button>
+              <a class="start__form-back link-btn" href="./index.html">Back</a>
+            </div>
+          </div>
+        </section>
+      </form>
     </main>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/toastify-js"
+    ></script>
     <script type="module" src="../js/start.js"></script>
   </body>
 </html>
