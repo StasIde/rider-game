@@ -7,8 +7,8 @@ class Modal {
         <div class="modal-content">
           <h2 class="modal-title"></h2>
           <p class="modal-text"></p>
-          <div class="modal-buttons">
-          </div>
+          <div class="modal-form-container"></div>
+          <div class="modal-buttons"></div>
         </div>
       `;
 
@@ -17,15 +17,23 @@ class Modal {
     this.overlay = this.modal.querySelector(".modal-overlay");
     this.title = this.modal.querySelector(".modal-title");
     this.text = this.modal.querySelector(".modal-text");
+    this.formContainer = this.modal.querySelector(".modal-form-container");
     this.buttonsContainer = this.modal.querySelector(".modal-buttons");
-
-    // this.overlay.addEventListener("click", () => this.close());
   }
 
-  open({ title = "", text = "", buttons = [] }) {
+  open({ title = "", text = "", form = null, buttons = [] }) {
     this.title.textContent = title;
     this.text.textContent = text;
+    this.formContainer.innerHTML = "";
     this.buttonsContainer.innerHTML = "";
+
+    if (form) {
+      if (typeof form === "string") {
+        this.formContainer.innerHTML = form;
+      } else if (form instanceof HTMLElement) {
+        this.formContainer.appendChild(form);
+      }
+    }
 
     buttons.forEach(({ label, onClick, className = "" }) => {
       const button = document.createElement("button");
@@ -39,6 +47,8 @@ class Modal {
     });
 
     this.modal.classList.add("open");
+    
+    return this;
   }
 
   close() {

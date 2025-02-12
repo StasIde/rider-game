@@ -1,6 +1,5 @@
 class Player {
   constructor(name, tricksCompleted = [], letters = "") {
-    this.id =
     this.name = name;
     this.tricksCompleted = tricksCompleted;
     this.letters = letters;
